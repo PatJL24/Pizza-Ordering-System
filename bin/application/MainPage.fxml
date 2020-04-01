@@ -7,7 +7,6 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PizzaController">
@@ -20,7 +19,6 @@
                </font>
             </Label>
             <ChoiceBox fx:id="sizeOfPizza" layoutX="23.0" layoutY="44.0" prefWidth="150.0" />
-            <VBox prefHeight="121.0" prefWidth="221.0" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="404.0" prefHeight="99.0" prefWidth="195.0">
@@ -40,9 +38,9 @@
                   <Font name="Times New Roman" size="18.0" />
                </font>
             </Button>
-            <Button layoutX="16.0" layoutY="29.0" mnemonicParsing="false" onAction="#clearAll" prefHeight="32.0" prefWidth="108.0" text="Clear All">
+            <Button layoutX="16.0" layoutY="29.0" mnemonicParsing="false" onAction="#clearAll" prefHeight="32.0" prefWidth="108.0" text="Clear Orders">
                <font>
-                  <Font name="Times New Roman" size="18.0" />
+                  <Font name="Times New Roman" size="16.0" />
                </font>
             </Button>
          </children>
@@ -59,7 +57,7 @@
                   <Font name="Times New Roman" size="23.0" />
                </font>
             </Label>
-            <Label fx:id="pizzaCost" layoutX="106.0" layoutY="-2.0" text="\$8.5">
+            <Label fx:id="pizzaCost" layoutX="115.0" layoutY="-2.0" text="8.5">
                <font>
                   <Font size="22.0" />
                </font>
@@ -69,7 +67,17 @@
                   <Font name="Times New Roman" size="23.0" />
                </font>
             </Label>
-            <Label fx:id="orderCost" layoutX="106.0" layoutY="54.0" text="\$8.5">
+            <Label fx:id="orderCost" layoutX="115.0" layoutY="54.0" text="8.5">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="pizzaCost1" layoutX="105.0" layoutY="-2.0" text="\$">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="pizzaCost11" layoutX="105.0" layoutY="54.0" text="\$">
                <font>
                   <Font size="22.0" />
                </font>

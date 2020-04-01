@@ -66,6 +66,10 @@ public class Pizza implements Serializable {
 		else
 			throw new IllegalPizza("Illegal ham!");		
 	} // end setHam
+
+	void setVegetarian(boolean veg) throws IllegalPizza {
+		this.vegetarian = veg;
+	}
 	
 	/**
 	 * The full Pizza constructor.
@@ -80,7 +84,7 @@ public class Pizza implements Serializable {
 	 */
 	public Pizza(String size, boolean vegetarian, String cheese, String pineapple, String greenPepper, String ham) throws IllegalPizza {
 		setSize(size);
-		this.vegetarian = vegetarian;
+		setVegetarian(vegetarian);
 		setCheese(cheese);
 		setPineapple(pineapple);
 		setGreenPepper(greenPepper);

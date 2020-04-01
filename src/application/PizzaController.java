@@ -1,8 +1,8 @@
 package application;
 
+import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
-import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -42,9 +42,8 @@ public class PizzaController {
 	@FXML CheckBox ham;
 	@FXML CheckBox vegetarian;
 	
-	// Slider and Label for the amount of Pizza the user wants to order.
+	// TextField which allows for user input in the amount of Pizza they want to order.
 	@FXML private TextField pizzaAmount;
-	@FXML private Label lblPizzaAmount;
 	int numOfPizza;
 	
 	// Labels and a TextArea for each individual's pizzas cost and total order cost.
@@ -65,27 +64,21 @@ public class PizzaController {
 	
 	//If any checkbox for the toppings are selected, and will update the Pizza object accordingly.
 	public void setActionToppings() throws IllegalPizza {
-		if (pineApple.isSelected()) {
-			pizza.setPineapple("Single");
-		}else {
-			pizza.setPineapple("None");
-		}
-		
-		if (ham.isSelected()) {
-			pizza.setHam("Single");
-		}else {
-			pizza.setHam("None");
-		}
-		
-		if (greenPepper.isSelected()) {
-			pizza.setGreenPepper("Single");
-		}else {
-			pizza.setGreenPepper("None");
-		}
-		
+
+		if (pineApple.isSelected())pizza.setPineapple("Single");
+		else pizza.setPineapple("None");
+
+		if (ham.isSelected()) pizza.setHam("Single");
+		else pizza.setHam("None");
+
+		if (greenPepper.isSelected()) pizza.setGreenPepper("Single");
+		else pizza.setGreenPepper("None");
+
+		if (vegetarian.isSelected()) pizza.setVegetarian(true);
+		else pizza.setVegetarian(false);
+
 		pizzaCost.setText("" + pizza.getCost());
 		orderCost.setText("" + linePizza.getCost());
-	
 	}
 
 	@FXML
@@ -93,6 +86,7 @@ public class PizzaController {
 		pizzaAmount.clear();
 		lineOrders.setText("Orders: \n");
 	}
+
 	@FXML
 	void initialize() throws IllegalPizza {
 		
@@ -102,41 +96,55 @@ public class PizzaController {
 		//To skip a line inside of the text field
 		lineOrders.setText("Orders: \n");
 
-		// Does not allow pineapple or green pepper to selected without ham.
-		pineApple.disableProperty().bind(vegetarian.selectedProperty());
-		greenPepper.disableProperty().bind(vegetarian.selectedProperty());
-		vegetarian.disableProperty().bind(Bindings.or(pineApple.selectedProperty(), greenPepper.selectedProperty()));
+		// To select the size of Pizza
+		sizeOfPizza.setItems(choiceListSize);
 
-		/**
-		// Changes the label and sets pizzaOrder depending on the number the slider moves on.
-		lblPizzaAmount.setText("" + (int)pizzaAmount.getValue());
-		pizzaAmount.valueProperty().addListener((observableValue, oldVal, newVal) ->
-    	{
-    		lblPizzaAmount.setText("" + newVal.intValue());
-    		numOfPizza = newVal.intValue();
-    		
-    		try {
-				linePizza.setNumber(numOfPizza);
-			} catch (IllegalPizza e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		// To select the type of Cheese
+		cheeseTopping.setItems(choiceListCheese);
+
+		// Default Pizza
+		sizeOfPizza.setValue("Small");
+		cheeseTopping.setValue("Single");
+		ham.setSelected(true);
+
+		// Does not allow pineapple or green pepper to selected without ham.
+		ham.disableProperty().bind(vegetarian.selectedProperty());
+		vegetarian.disableProperty().bind(ham.selectedProperty());
+
+		//Listens to when the number of pizzas has changed and automatically changes the total order costs.
+		pizzaAmount.textProperty().addListener((observableValue, oldText, newText) ->
+		{
+			if (newText != null && !newText.isEmpty()) {
+				try {
+					numOfPizza = Integer.parseInt(newText);
+
+					if(numOfPizza < 1 && numOfPizza > 100){
+						pizzaAmount.setPromptText("");
+					}else{
+						linePizza.setNumber(numOfPizza);
+						float totalOrderCost = (float) (Math.round(linePizza.getCost() * 100.0) / 100.0);
+						orderCost.setText("" + totalOrderCost);
+					}
+				} catch (NumberFormatException | IllegalPizza e) {
+					((StringProperty)observableValue).setValue(oldText);
+				}
+			}else{
+				numOfPizza = 1;
+				try {
+					linePizza.setNumber(numOfPizza);
+				} catch (IllegalPizza illegalPizza) {
+					illegalPizza.printStackTrace();
+				}
+				float totalOrderCost = (float) (Math.round(linePizza.getCost() * 100.0) / 100.0);
+				orderCost.setText("" + totalOrderCost);
 			}
-    		
-    		if(numOfPizza < 1) {
-    			float totalOrderCost = linePizza.getCost();
-    			orderCost.setText("$" + totalOrderCost);
-    			
-    		}else {
-    			float totalOrderCost = linePizza.getCost();
-    			orderCost.setText("$" + totalOrderCost);
-    		}
-    		
-    	});
-		*/
+
+		});
+
 		// Listens to see if the choice box has been changed and updates the Pizza object accordingly.
 		sizeOfPizza.valueProperty().addListener((observableValue, oldVal, newVal) ->
     	{
-    		String pizzaSize = sizeOfPizza.getValue().toString();
+    		String pizzaSize = sizeOfPizza.getValue();
     		
     		try {
 				pizza.setSize(pizzaSize);
@@ -144,38 +152,22 @@ public class PizzaController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-    		
     		pizzaCost.setText("" + pizza.getCost());
     		orderCost.setText("" + linePizza.getCost());
-    		
     	});
 		
 		// Listens to see if the choice box has been changed and updates the Pizza object accordingly.
 		cheeseTopping.valueProperty().addListener((observableValue, oldVal, newVal) ->
     	{
-    		String pizzaCheese = cheeseTopping.getValue().toString();
-    		
+    		String pizzaCheese = cheeseTopping.getValue();
     		try {
 				pizza.setCheese(pizzaCheese);
 			} catch (IllegalPizza e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-    		
     		pizzaCost.setText("" + pizza.getCost());
     		orderCost.setText("" + linePizza.getCost());
-    		
     	});
-		
-		// To select the size of Pizza
-		sizeOfPizza.setItems(choiceListSize);
-		sizeOfPizza.setValue("Small");
-		
-		// To select the type of Cheese
-		cheeseTopping.setItems(choiceListCheese);
-		cheeseTopping.setValue("Single");
-		
-		// Handles when user selects Ham
-		ham.setSelected(true);
 	}
 }

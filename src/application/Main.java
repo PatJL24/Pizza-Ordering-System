@@ -11,9 +11,7 @@ import javafx.scene.layout.AnchorPane;
  * @author Patrick Li
  * @version 1.0
  */
-
 public class Main extends Application {
-	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -27,7 +25,6 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
-	
 	public static void main(String[] args) {
 		launch(args);
 	}
