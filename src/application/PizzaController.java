@@ -1,14 +1,11 @@
 package application;
 
-import javafx.scene.control.TextArea;
+import javafx.event.ActionEvent;
+import javafx.scene.control.*;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
 
 /**
  * This class is to handle the backend for the GUI.
@@ -46,7 +43,7 @@ public class PizzaController {
 	@FXML CheckBox vegetarian;
 	
 	// Slider and Label for the amount of Pizza the user wants to order.
-	@FXML private Slider pizzaAmount = new Slider(1, 100, 1);
+	@FXML private TextField pizzaAmount;
 	@FXML private Label lblPizzaAmount;
 	int numOfPizza;
 	
@@ -92,15 +89,23 @@ public class PizzaController {
 	}
 
 	@FXML
+	void clearAll(ActionEvent event){
+		pizzaAmount.clear();
+		lineOrders.setText("Orders: \n");
+	}
+	@FXML
 	void initialize() throws IllegalPizza {
 		
 		pizza = new Pizza();
 		linePizza = new LineItem(pizza);
 
+		//To skip a line inside of the text field
+		lineOrders.setText("Orders: \n");
+
 		// Does not allow pineapple or green pepper to selected without ham.
-		pineApple.disableProperty().bind(ham.selectedProperty().not());
-		greenPepper.disableProperty().bind(ham.selectedProperty().not());
-		ham.disableProperty().bind(Bindings.or(pineApple.selectedProperty(), greenPepper.selectedProperty()));
+		pineApple.disableProperty().bind(vegetarian.selectedProperty());
+		greenPepper.disableProperty().bind(vegetarian.selectedProperty());
+		vegetarian.disableProperty().bind(Bindings.or(pineApple.selectedProperty(), greenPepper.selectedProperty()));
 
 		/**
 		// Changes the label and sets pizzaOrder depending on the number the slider moves on.
@@ -161,7 +166,6 @@ public class PizzaController {
     		orderCost.setText("" + linePizza.getCost());
     		
     	});
-		
 		
 		// To select the size of Pizza
 		sizeOfPizza.setItems(choiceListSize);
