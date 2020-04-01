@@ -43,6 +43,7 @@ public class PizzaController {
 	@FXML CheckBox pineApple;
 	@FXML CheckBox greenPepper;
 	@FXML CheckBox ham;
+	@FXML CheckBox vegetarian;
 	
 	// Slider and Label for the amount of Pizza the user wants to order.
 	@FXML private Slider pizzaAmount = new Slider(1, 100, 1);

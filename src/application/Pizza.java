@@ -1,18 +1,17 @@
 package application;
 
-
 import java.io.Serializable;
 /**
  * This class is part of the solution for assignment 3. The class represents a pizza, containing
  * the size, the amount of cheese, pineapple, green pepper and ham. It can also produce the cost 
  * of that pizza using hard-coded prices.
  * @author Alan McLeod
- * @version 1.3
+ * @version 1.4
  */
 public class Pizza implements Serializable {
 
-	private static final long serialVersionUID = 1856146538106631512L;
 	private String size;
+	private boolean vegetarian;
 	private String cheese;
 	private String pineapple;
 	private String greenPepper;
@@ -23,7 +22,7 @@ public class Pizza implements Serializable {
 	private final float LARGE_COST = 11.00F;
 	private final float COST_PER_TOPPING = 1.50F;
 	
-	public void setSize(String size) throws IllegalPizza {
+	void setSize(String size) throws IllegalPizza {
 		if (size == null)
 			throw new IllegalPizza("Size not provided!");
 		if (size.equals("Small") || size.equals("Medium") || size.equals("Large"))
@@ -32,7 +31,7 @@ public class Pizza implements Serializable {
 			throw new IllegalPizza("Illegal size!");		
 	} // end setSize
 	
-	public void setCheese(String cheese) throws IllegalPizza {
+	void setCheese(String cheese) throws IllegalPizza {
 		if (cheese == null)
 			throw new IllegalPizza("Cheese not provided!");
 		if (cheese.equals("Single") || cheese.equals("Double") || cheese.equals("Triple"))
@@ -41,7 +40,7 @@ public class Pizza implements Serializable {
 			throw new IllegalPizza("Illegal cheese!");		
 	} // end setCheese
 	
-	public void setPineapple(String pineapple) throws IllegalPizza {
+	void setPineapple(String pineapple) throws IllegalPizza {
 		if (pineapple == null)
 			throw new IllegalPizza("Pineapple not provided!");
 		if (pineapple.equals("None") || pineapple.equals("Single"))
@@ -50,7 +49,7 @@ public class Pizza implements Serializable {
 			throw new IllegalPizza("Illegal pineapple!");		
 	} // end setPineapple
 	
-	public void setGreenPepper(String greenPepper) throws IllegalPizza {
+	void setGreenPepper(String greenPepper) throws IllegalPizza {
 		if (greenPepper == null)
 			throw new IllegalPizza("Green pepper not provided!");
 		if (greenPepper.equals("None") || greenPepper.equals("Single"))
@@ -59,7 +58,7 @@ public class Pizza implements Serializable {
 			throw new IllegalPizza("Illegal green pepper!");		
 	} // end setGreenPepper
 	
-	public void setHam(String ham) throws IllegalPizza {
+	void setHam(String ham) throws IllegalPizza {
 		if (ham == null)
 			throw new IllegalPizza("Ham not provided!");
 		if (ham.equals("None") || ham.equals("Single"))
@@ -69,27 +68,43 @@ public class Pizza implements Serializable {
 	} // end setHam
 	
 	/**
-	 * The Pizza constructor.
+	 * The full Pizza constructor.
+	 * @param size Must be "Small", "Medium" or "Large".
+	 * @param vegetarian true if a vegetarian pizza.
+	 * @param cheese Must be "Single", "Double" or "Triple".
+	 * @param pineapple Must be "None" or "Single".
+	 * @param greenPepper Must be "None" or "Single".
+	 * @param ham Must be "None" or "Single".
+	 * @throws IllegalPizza If any of the parameters are not legal or if ham 
+	 * not "None" and it is a vegetarian pizza.
+	 */
+	public Pizza(String size, boolean vegetarian, String cheese, String pineapple, String greenPepper, String ham) throws IllegalPizza {
+		setSize(size);
+		this.vegetarian = vegetarian;
+		setCheese(cheese);
+		setPineapple(pineapple);
+		setGreenPepper(greenPepper);
+		setHam(ham);
+		if (!this.ham.equals("None") && vegetarian)
+			throw new IllegalPizza("You cannot have ham on a vegetarian pizza!");
+	} // end full parameter constructor
+	
+	/**
+	 * The five parameter Pizza constructor.  Assumes a non-vegetarian pizza.
 	 * @param size Must be "Small", "Medium" or "Large".
 	 * @param cheese Must be "Single", "Double" or "Triple".
 	 * @param pineapple Must be "None" or "Single".
 	 * @param greenPepper Must be "None" or "Single".
 	 * @param ham Must be "None" or "Single".
-	 * @throws IllegalPizza If any of the parameters are not legal or if ham is "None" and
-	 * pineapple or greenPepper is not "None".
+	 * @throws IllegalPizza If any of the parameters are not legal.
 	 */
 	public Pizza(String size, String cheese, String pineapple, String greenPepper, String ham) throws IllegalPizza {
-		setSize(size);
-		setCheese(cheese);
-		setPineapple(pineapple);
-		setGreenPepper(greenPepper);
-		setHam(ham);
-		if (this.ham.equals("None") && (!this.pineapple.equals("None") || !this.greenPepper.equals("None")))
-			throw new IllegalPizza("You must have ham with your pineapple or green pepper!");
-	} // end full parameter constructor
+		this(size, false, cheese, pineapple, greenPepper, ham);
+	}
 	
 	/**
 	 * The default Pizza constructor.
+	 * Creates a small pizza with single cheese and single ham.
 	 * @throws IllegalPizza Should not be thrown.
 	 */
 	public Pizza() throws IllegalPizza {
@@ -134,7 +149,9 @@ public class Pizza implements Serializable {
 	 * @return A string description of the current Pizza object.
 	 */
 	public String toString() {
-		String out = size + " pizza, " + cheese + " cheese";
+		String out = size;
+		if (vegetarian) out += " vegetarian";
+		out += " pizza, " + cheese + " cheese";
 		if (pineapple.equals("Single"))
 			out += ", pineapple";
 		if (greenPepper.equals("Single"))
@@ -155,7 +172,7 @@ public class Pizza implements Serializable {
 	public boolean equals(Object other) {
 		if (other instanceof Pizza) {
 			Pizza otherP = (Pizza)other;
-			return size.equals(otherP.size) && cheese.equals(otherP.cheese) && 
+			return size.equals(otherP.size) && vegetarian == otherP.vegetarian && cheese.equals(otherP.cheese) && 
 				   pineapple.equals(otherP.pineapple) && greenPepper.equals(otherP.greenPepper) && 
 				   ham.equals(otherP.ham);
 		}
@@ -169,7 +186,7 @@ public class Pizza implements Serializable {
 	public Pizza clone() {
 		Pizza outP = null;
 		try {
-			outP = new Pizza(size, cheese, pineapple, greenPepper, ham);
+			outP = new Pizza(size, vegetarian, cheese, pineapple, greenPepper, ham);
 		} catch (IllegalPizza e) {
 		}
 		return outP;

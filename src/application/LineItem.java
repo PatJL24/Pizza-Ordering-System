@@ -71,9 +71,9 @@ public class LineItem implements Comparable<LineItem>, Serializable {
 	public float getCost() {
 		float discount = 1.0F;
 		if (numberPizzas >= 10 && numberPizzas <= 20)
-			discount = 0.95F;
-		else if (numberPizzas > 20)
 			discount = 0.9F;
+		else if (numberPizzas > 20)
+			discount = 0.85F;
 		return numberPizzas * discount * pizza.getCost();
 	} // end getCost
 	
