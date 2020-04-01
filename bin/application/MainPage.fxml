@@ -30,7 +30,7 @@
             </ChoiceBox>
          </children>
       </VBox>
-      <VBox layoutX="215.0" prefHeight="93.0" prefWidth="188.0" spacing="10.0">
+      <VBox layoutX="409.0" prefHeight="93.0" prefWidth="188.0" spacing="10.0">
          <children>
             <Label fx:id="pizzaCheese" text="Cheese">
                <VBox.margin>
@@ -47,108 +47,72 @@
             </ChoiceBox>
          </children>
       </VBox>
-      <VBox layoutX="424.0" prefHeight="127.0" prefWidth="175.0" spacing="10.0">
+      <AnchorPane layoutX="403.0" layoutY="86.0" prefHeight="113.0" prefWidth="200.0">
          <children>
-            <Label text="Pizza Toppings">
+            <Label layoutX="50.0" layoutY="5.0" prefHeight="17.0" prefWidth="95.0" text="Pizza Toppings">
                <font>
                   <Font name="Times New Roman" size="14.0" />
                </font>
-               <VBox.margin>
-                  <Insets left="40.0" />
-               </VBox.margin>
             </Label>
-            <CheckBox fx:id="pineApple" mnemonicParsing="false" onAction="#setActionToppings" text="Pineapple">
-               <VBox.margin>
-                  <Insets left="15.0" />
-               </VBox.margin>
-            </CheckBox>
-            <CheckBox fx:id="greenPepper" mnemonicParsing="false" onAction="#setActionToppings" text="Green Pepper">
-               <VBox.margin>
-                  <Insets left="15.0" />
-               </VBox.margin>
-            </CheckBox>
-            <CheckBox fx:id="ham" mnemonicParsing="false" onAction="#setActionToppings" text="Ham">
-               <VBox.margin>
-                  <Insets left="15.0" />
-               </VBox.margin></CheckBox>
+            <CheckBox fx:id="pineApple" layoutX="12.0" layoutY="32.0" mnemonicParsing="false" onAction="#setActionToppings" text="Pineapple" />
+            <CheckBox fx:id="greenPepper" layoutX="98.0" layoutY="80.0" mnemonicParsing="false" onAction="#setActionToppings" text="Green Pepper" />
+            <CheckBox fx:id="ham" layoutX="12.0" layoutY="80.0" mnemonicParsing="false" onAction="#setActionToppings" text="Ham" />
+            <CheckBox layoutX="99.0" layoutY="32.0" mnemonicParsing="false" text="Vegetarian" />
          </children>
-      </VBox>
-      <VBox layoutX="215.0" layoutY="110.0" prefHeight="93.0" prefWidth="188.0" spacing="10.0">
+      </AnchorPane>
+      <AnchorPane layoutX="188.0" layoutY="86.0" prefHeight="113.0" prefWidth="200.0">
          <children>
-            <Label text="Quantities">
+            <Label layoutX="63.0" layoutY="6.0" text="Quantities">
                <font>
                   <Font name="Times New Roman" size="14.0" />
                </font>
-               <VBox.margin>
-                  <Insets left="60.0" />
-               </VBox.margin>
             </Label>
-            <Slider fx:id="pizzaAmount" blockIncrement="1" max="100" min="1" />
-            <Label fx:id="lblPizzaAmount" text="T">
+            <Slider fx:id="pizzaAmount" blockIncrement="1" layoutX="26.0" layoutY="50.0" max="100" min="1" />
+            <Label fx:id="lblPizzaAmount" layoutX="92.0" layoutY="76.0" text="T">
                <font>
                   <Font name="Times New Roman" size="14.0" />
                </font>
-               <VBox.margin>
-                  <Insets left="1.0" />
-               </VBox.margin>
             </Label>
          </children>
-      </VBox>
-      <VBox layoutY="238.0" prefHeight="167.0" prefWidth="600.0">
+      </AnchorPane>
+      <AnchorPane layoutY="80.0" prefHeight="123.0" prefWidth="188.0">
          <children>
-            <VBox prefHeight="170.0" prefWidth="583.0">
-               <children>
-                  <TextArea fx:id="lineOrders" prefHeight="200.0" prefWidth="200.0" text="Line Order:&#10;" />
-               </children>
-            </VBox>
-         </children></VBox>
-      <VBox layoutX="408.0" layoutY="110.0" prefHeight="127.0" prefWidth="195.0">
-         <children>
-            <Label text="Pizza Cost:">
+            <Label layoutX="1.0" layoutY="30.0" text="Pizza Cost:">
                <font>
                   <Font name="Times New Roman" size="23.0" />
                </font>
-               <VBox.margin>
-                  <Insets left="50.0" top="5.0" />
-               </VBox.margin>
             </Label>
-            <Label fx:id="pizzaCost" text="\$8.5">
+            <Label fx:id="pizzaCost" layoutX="109.0" layoutY="28.0" text="\$8.5">
                <font>
                   <Font size="22.0" />
                </font>
-               <VBox.margin>
-                  <Insets left="50.0" />
-               </VBox.margin>
             </Label>
-            <Label text="Order Cost:">
+            <Label layoutX="1.0" layoutY="80.0" text="Order Cost:">
                <font>
                   <Font name="Times New Roman" size="23.0" />
                </font>
-               <VBox.margin>
-                  <Insets left="50.0" />
-               </VBox.margin>
             </Label>
-            <Label fx:id="orderCost" text="\$8.5">
+            <Label fx:id="orderCost" layoutX="109.0" layoutY="78.0" text="\$8.5">
                <font>
                   <Font size="22.0" />
                </font>
-               <VBox.margin>
-                  <Insets left="50.0" />
-               </VBox.margin>
             </Label>
          </children>
-      </VBox>
-      <VBox layoutY="109.0" prefHeight="121.0" prefWidth="221.0">
+      </AnchorPane>
+      <AnchorPane layoutX="461.0" layoutY="228.0" prefHeight="172.0" prefWidth="138.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#saveOrderButtonPushed" text="Save Order">
+            <Button layoutX="14.0" layoutY="94.0" mnemonicParsing="false" onAction="#saveOrderButtonPushed" text="Save Order">
                <font>
                   <Font name="Times New Roman" size="20.0" />
                </font>
-               <VBox.margin>
-                  <Insets left="35.0" top="25.0" />
-               </VBox.margin>
+            </Button>
+            <Button layoutX="13.0" layoutY="35.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="119.0" text="Clear All">
+               <font>
+                  <Font name="Times New Roman" size="20.0" />
+               </font>
             </Button>
          </children>
-      </VBox>
+      </AnchorPane>
+      <TextArea fx:id="lineOrders" layoutX="-6.0" layoutY="200.0" prefHeight="200.0" prefWidth="477.0" text="Line Order:&#10;&#10;" />
    </children>
 </AnchorPane>
