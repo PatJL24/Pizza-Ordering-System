@@ -100,7 +100,8 @@ public class PizzaController {
 		pineApple.disableProperty().bind(ham.selectedProperty().not());
 		greenPepper.disableProperty().bind(ham.selectedProperty().not());
 		ham.disableProperty().bind(Bindings.or(pineApple.selectedProperty(), greenPepper.selectedProperty()));
-		
+
+		/**
 		// Changes the label and sets pizzaOrder depending on the number the slider moves on.
 		lblPizzaAmount.setText("" + (int)pizzaAmount.getValue());
 		pizzaAmount.valueProperty().addListener((observableValue, oldVal, newVal) ->
@@ -125,7 +126,7 @@ public class PizzaController {
     		}
     		
     	});
-		
+		*/
 		// Listens to see if the choice box has been changed and updates the Pizza object accordingly.
 		sizeOfPizza.valueProperty().addListener((observableValue, oldVal, newVal) ->
     	{
