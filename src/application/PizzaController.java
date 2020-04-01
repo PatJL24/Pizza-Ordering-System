@@ -59,7 +59,8 @@ public class PizzaController {
 	public void saveOrderButtonPushed() throws IllegalPizza {
 		// Displays the number of Pizza to the Line Order Section.
 		String pizzaOrders = linePizza.toString();
-		lineOrders.appendText(pizzaOrders + "\n");
+		float totalOrderCost = (float) (Math.round(linePizza.getCost() * 100.0) / 100.0);
+		lineOrders.appendText(pizzaOrders + " Total Order Cost: $"+ totalOrderCost + "\n");
 	}	
 	
 	//If any checkbox for the toppings are selected, and will update the Pizza object accordingly.
@@ -77,9 +78,11 @@ public class PizzaController {
 		else pizza.setVegetarian(false);
 
 		pizzaCost.setText("" + pizza.getCost());
-		orderCost.setText("" + linePizza.getCost());
+		float totalOrderCost = (float) (Math.round(linePizza.getCost() * 100.0) / 100.0);
+		orderCost.setText("" + totalOrderCost);
 	}
 
+	//Resets all the settings and values back to the default values.
 	@FXML
 	void clearAll(ActionEvent event) throws IllegalPizza {
 		pizzaAmount.clear();
