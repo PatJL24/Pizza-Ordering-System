@@ -17,7 +17,7 @@ import javafx.fxml.FXML;
  * <p>
  * 
  * @author Patrick Li
- * @version 1.0
+ * @version 2.0
  */
 public class PizzaController {
 	
@@ -64,7 +64,6 @@ public class PizzaController {
 	
 	//If any checkbox for the toppings are selected, and will update the Pizza object accordingly.
 	public void setActionToppings() throws IllegalPizza {
-
 		if (pineApple.isSelected())pizza.setPineapple("Single");
 		else pizza.setPineapple("None");
 
@@ -82,14 +81,25 @@ public class PizzaController {
 	}
 
 	@FXML
-	void clearAll(ActionEvent event){
+	void clearAll(ActionEvent event) throws IllegalPizza {
 		pizzaAmount.clear();
+		pizza.setSize("Small");
+		pizza.setVegetarian(false);
+		pizza.setGreenPepper("None");
+		pizza.setPineapple("None");
+		pizza.setHam("Single");
+		pizza.setCheese("Single");
 		lineOrders.setText("Orders: \n");
+		sizeOfPizza.setValue("Small");
+		cheeseTopping.setValue("Single");
+		ham.setSelected(true);
+		pineApple.setSelected(false);
+		greenPepper.setSelected(false);
+		vegetarian.setSelected(false);
 	}
 
 	@FXML
 	void initialize() throws IllegalPizza {
-		
 		pizza = new Pizza();
 		linePizza = new LineItem(pizza);
 

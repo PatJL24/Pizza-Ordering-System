@@ -38,7 +38,7 @@
                   <Font name="Times New Roman" size="18.0" />
                </font>
             </Button>
-            <Button layoutX="16.0" layoutY="29.0" mnemonicParsing="false" onAction="#clearAll" prefHeight="32.0" prefWidth="108.0" text="Clear Orders">
+            <Button layoutX="16.0" layoutY="29.0" mnemonicParsing="false" onAction="#clearAll" prefHeight="32.0" prefWidth="108.0" text="Reset Orders">
                <font>
                   <Font name="Times New Roman" size="16.0" />
                </font>
