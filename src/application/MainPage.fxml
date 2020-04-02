@@ -21,7 +21,7 @@
     <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="187.33334350585938" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <TextArea fx:id="lineOrders" editable="false" prefHeight="218.0" prefWidth="624.0" promptText="Orders:" text="&#10;&#10;" GridPane.rowIndex="1">
+      <TextArea fx:id="lineOrders" editable="false" prefHeight="218.0" prefWidth="624.0" text="&#10;&#10;" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
          </GridPane.margin>
@@ -134,7 +134,7 @@
                   <Insets left="40.0" />
                </GridPane.margin>
             </ChoiceBox>
-            <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveOrderButtonPushed" prefHeight="32.0" prefWidth="108.0" text="Save Order" GridPane.columnIndex="2" GridPane.rowIndex="5">
+            <Button fx:id="saveButton" mnemonicParsing="false" prefHeight="32.0" prefWidth="108.0" text="Save Order" GridPane.columnIndex="2" GridPane.rowIndex="5">
                <font>
                   <Font name="Times New Roman" size="16.0" />
                </font>
@@ -142,7 +142,7 @@
                   <Insets left="40.0" />
                </GridPane.margin>
             </Button>
-            <Button mnemonicParsing="false" onAction="#clearAll" prefHeight="32.0" prefWidth="108.0" text="Reset Order" GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <Button mnemonicParsing="false" onAction="#clearAll" prefHeight="32.0" prefWidth="108.0" text="Reset" GridPane.columnIndex="2" GridPane.rowIndex="3">
                <font>
                   <Font name="Times New Roman" size="16.0" />
                </font>

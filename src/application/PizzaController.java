@@ -7,6 +7,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
 /**
  * This class is to handle the backend for the GUI.
  * <p>
@@ -45,30 +49,24 @@ public class PizzaController {
 	@FXML private TextField pizzaAmount;
 	int numOfPizza;
 	
-	// Labels and a TextArea for each individual's pizzas cost and total order cost.
+	//Labels, TextFields, TextArea, and labels which represent the total costs.
 	@FXML private TextField pizzaCost;
 	@FXML private TextField orderCost;
 	@FXML private TextField totalCost;
 	@FXML private TextArea lineOrders;
-	
-	// Creates a instance from the Pizza class and from the LineItem Class.
+
+	//Creates a instance from the Pizza class and from the LineItem Class.
 	Pizza pizza;
 	LineItem linePizza;
+
+	//Keeps track of orders.
+	private ArrayList<String> orders = new ArrayList<>();
 
 	//float variable to keep track of the overall total cost:
 	float overallCost;
 
-	// To updates the Pizza updated. and updates the cost of the Pizza and the total cost of the order.
-	public void saveOrderButtonPushed() {
-		if (pizzaAmount.getText().equals(""))
-			return;
-		String pizzaOrders = linePizza.toString();
-		float costOrder = (float) (Math.round(linePizza.getCost() * 100.0) / 100.0);
-		overallCost +=  costOrder;
-		updateTotalCost(overallCost);
-		lineOrders.appendText(pizzaOrders + " Quantity Cost: $"
-				+ String.format("%.2f", costOrder) + ".\n");
-	}
+	//Buttons
+	@FXML private Button saveButton;
 
 	//If any checkbox for the toppings are selected, and will update the Pizza object accordingly.
 	public void setActionToppings() throws IllegalPizza {
@@ -123,9 +121,8 @@ public class PizzaController {
 		pizza.setCheese("Single");
 		linePizza.setNumber(1);
 
-
 		//Resets the GUI Settings back to default
-		lineOrders.setText("Orders: \n");
+		lineOrders.setText("Total Cost: ");
 		pizzaCost.setText("");
 		sizeOfPizza.setValue("Small");
 		cheeseTopping.setValue("Single");
@@ -140,6 +137,9 @@ public class PizzaController {
 		updateOrderCost(costPerOrder());
 		overallCost = 0;
 		updateTotalCost(0);
+
+		//Resets the Arraylist to a blank list.
+		orders.clear();
 	}
 
 	@FXML
@@ -148,7 +148,7 @@ public class PizzaController {
 		linePizza = new LineItem(pizza);
 
 		//To skip a line inside of the text field
-		lineOrders.setText("Orders: \n");
+		lineOrders.setText("Total Cost: ");
 
 		// To select the size of Pizza
 		sizeOfPizza.setItems(choiceListSize);
@@ -204,12 +204,42 @@ public class PizzaController {
 		// Listens to see if the choice box has been changed and updates the Pizza object accordingly.
 		cheeseTopping.valueProperty().addListener((observableValue, oldVal, newVal) ->
     	{
+    		//Converts the choice of cheese to a string format.
     		String pizzaCheese = cheeseTopping.getValue();
+    		//Changes the value of the pizza and updates the Cost display.
     		try {
 				pizza.setCheese(pizzaCheese);
 			} catch (IllegalPizza e) {}
 			pizzaCost.setText("" + String.format("%.2f", pizza.getCost()));
 			orderCost.setText("" + String.format("%.2f", linePizza.getCost()));
     	});
+
+		//Updates the display if the user clicks on the save button.
+		saveButton.setOnAction(actionEvent -> {
+			//If the Pizza amount is empty, It will not print anything.
+			if (pizzaAmount.getText().equals("")) return;
+
+			//Converts one order to a string format.
+			String pizzaOrders = linePizza.toString();
+
+			//Updates the Total Costs.
+			float costOrder = (float) (Math.round(linePizza.getCost() * 100.0) / 100.0);
+			overallCost +=  costOrder;
+			updateTotalCost(overallCost);
+
+			//Initializes an String used to display the orders and total cost.
+			String output = "";
+
+			//Adds the orders to the ArrayList.
+			orders.add(pizzaOrders);
+
+			//For each loop adding the orders to the String output variable.
+			for(String orderString: orders){
+				output += orderString + "\n";
+			}
+			//Updates the TextField displaying the orders and total costs.
+			output += "Total Cost: " + String.format("%.2f", overallCost) + "\n";
+			lineOrders.setText(output);
+		});
 	}
 }
