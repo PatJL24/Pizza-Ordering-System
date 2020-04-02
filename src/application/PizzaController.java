@@ -47,9 +47,9 @@ public class PizzaController {
 	int numOfPizza;
 	
 	// Labels and a TextArea for each individual's pizzas cost and total order cost.
-	@FXML private Label pizzaCost;
-	@FXML private Label orderCost;
-	@FXML private Label totalCost;
+	@FXML private TextField pizzaCost;
+	@FXML private TextField orderCost;
+	@FXML private TextField totalCost;
 	@FXML private TextArea lineOrders;
 	
 	// Creates a instance from the Pizza class and from the LineItem Class.
@@ -69,7 +69,7 @@ public class PizzaController {
 				+ String.format("%.2f", costOrder) + ".\n");
 
 		overallCost +=  costOrder;
-		totalCost.setText("" + String.format("%.2f", overallCost));
+		updateTotalCost(overallCost);
 	}	
 	
 	//If any checkbox for the toppings are selected, and will update the Pizza object accordingly.
@@ -86,9 +86,30 @@ public class PizzaController {
 		if (vegetarian.isSelected()) pizza.setVegetarian(true);
 		else pizza.setVegetarian(false);
 
-		pizzaCost.setText("" + String.format("%.2f", pizza.getCost()));
+		updatePizzaCost();
 		float costOrder = (float) (Math.round(linePizza.getCost() * 100.0) / 100.0);
+		updateOrderCost(costOrder);
+	}
+
+	//Updates the Pizza Cost Text Field.
+	public void updatePizzaCost(){
+		pizzaCost.setText("" + String.format("%.2f", pizza.getCost()));
+	}
+
+	//Updates the Cost Per Order Cost Text Field.
+	public void updateOrderCost(float costOrder){
 		orderCost.setText("" + String.format("%.2f", costOrder));
+	}
+
+	//Updates the Total Order Cost Text Field
+	public void updateTotalCost(float overallCost){
+		totalCost.setText("" + String.format("%.2f", overallCost));
+	}
+
+	//Converts the Cost per order to 2 decimal places.
+	public float costPerOrder(){
+		float costOrder = (float) (Math.round(linePizza.getCost() * 100.0) / 100.0);
+		return costOrder;
 	}
 
 	//Resets all the settings and values back to the default values.
@@ -115,7 +136,7 @@ public class PizzaController {
 		vegetarian.setSelected(false);
 
 		overallCost = 0;
-		totalCost.setText("" + String.format("%.2f", overallCost));
+		updateTotalCost(overallCost);
 	}
 
 	@FXML
@@ -142,9 +163,9 @@ public class PizzaController {
 		vegetarian.disableProperty().bind(ham.selectedProperty());
 
 		//Displays the cost of one default pizza.
-		pizzaCost.setText("" + String.format("%.2f", pizza.getCost()));
-		orderCost.setText("" + String.format("%.2f", linePizza.getCost()));
-		totalCost.setText("" + String.format("%.2f", overallCost));
+		updatePizzaCost();
+		updateOrderCost(linePizza.getCost());
+		updateTotalCost(overallCost);
 
 		//Listens to when the number of pizzas has changed and automatically changes the total order costs.
 		pizzaAmount.textProperty().addListener((observableValue, oldText, newText) ->
@@ -157,8 +178,8 @@ public class PizzaController {
 						pizzaAmount.setPromptText("");
 					}else{
 						linePizza.setNumber(numOfPizza);
-						float costOrder = (float) (Math.round(linePizza.getCost() * 100.0) / 100.0);
-						orderCost.setText("" + String.format("%.2f", costOrder));
+						float costOrder = costPerOrder();
+						updateOrderCost(costOrder);
 					}
 				} catch (NumberFormatException | IllegalPizza e) {
 					((StringProperty)observableValue).setValue(oldText);
@@ -170,8 +191,8 @@ public class PizzaController {
 				} catch (IllegalPizza illegalPizza) {
 					illegalPizza.printStackTrace();
 				}
-				float costOrder = (float) (Math.round(linePizza.getCost() * 100.0) / 100.0);
-				orderCost.setText("" + String.format("%.2f", costOrder));
+				float costOrder = costPerOrder();
+				updateOrderCost(costOrder);
 			}
 		});
 
@@ -186,8 +207,8 @@ public class PizzaController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-    		pizzaCost.setText("" + String.format("%.2f", pizza.getCost()));
-    		orderCost.setText("" + String.format("%.2f", linePizza.getCost()));
+    		updatePizzaCost();
+    		updateOrderCost(linePizza.getCost());
     	});
 		
 		// Listens to see if the choice box has been changed and updates the Pizza object accordingly.

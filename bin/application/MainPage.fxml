@@ -26,16 +26,11 @@
             <TextArea fx:id="lineOrders" editable="false" layoutX="7.0" layoutY="3.0" prefHeight="185.0" prefWidth="590.0" promptText="Orders:" text="&#10;" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="26.0" layoutY="112.0" prefHeight="88.0" prefWidth="203.0">
+      <AnchorPane layoutX="14.0" layoutY="109.0" prefHeight="88.0" prefWidth="203.0">
          <children>
             <Label layoutX="-1.0" text="Pizza Cost:">
                <font>
                   <Font name="Times New Roman" size="23.0" />
-               </font>
-            </Label>
-            <Label fx:id="pizzaCost" layoutX="115.0" layoutY="-2.0" text="8.5">
-               <font>
-                  <Font size="22.0" />
                </font>
             </Label>
             <Label layoutX="-2.0" layoutY="30.0" text="Order Cost:">
@@ -43,36 +38,14 @@
                   <Font name="Times New Roman" size="23.0" />
                </font>
             </Label>
-            <Label fx:id="orderCost" layoutX="115.0" layoutY="28.0" text="8.5">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Label>
-            <Label fx:id="pizzaCost1" layoutX="105.0" layoutY="-2.0" text="\$">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Label>
-            <Label fx:id="pizzaCost11" layoutX="106.0" layoutY="28.0" text="\$">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Label>
             <Label layoutX="-1.0" layoutY="60.0" text="Total Cost:">
                <font>
                   <Font name="Times New Roman" size="23.0" />
                </font>
             </Label>
-            <Label fx:id="pizzaCost111" layoutX="105.0" layoutY="58.0" text="\$">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Label>
-            <Label fx:id="totalCost" layoutX="115.0" layoutY="58.0" text="8.5">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Label>
+            <TextField fx:id="pizzaCost" layoutX="114.0" layoutY="2.0" prefHeight="25.0" prefWidth="75.0" />
+            <TextField fx:id="orderCost" layoutX="114.0" layoutY="31.0" prefHeight="25.0" prefWidth="75.0" />
+            <TextField fx:id="totalCost" layoutX="114.0" layoutY="61.0" prefHeight="25.0" prefWidth="75.0" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="204.0" layoutY="1.0" prefHeight="111.0" prefWidth="203.0">
