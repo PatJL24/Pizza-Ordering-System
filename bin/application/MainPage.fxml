@@ -134,7 +134,7 @@
                   <Insets left="40.0" />
                </GridPane.margin>
             </ChoiceBox>
-            <Button mnemonicParsing="false" onAction="#saveOrderButtonPushed" prefHeight="32.0" prefWidth="108.0" text="Save Order" GridPane.columnIndex="2" GridPane.rowIndex="5">
+            <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveOrderButtonPushed" prefHeight="32.0" prefWidth="108.0" text="Save Order" GridPane.columnIndex="2" GridPane.rowIndex="5">
                <font>
                   <Font name="Times New Roman" size="16.0" />
                </font>

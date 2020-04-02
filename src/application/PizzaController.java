@@ -59,8 +59,7 @@ public class PizzaController {
 	float overallCost;
 
 	// To updates the Pizza updated. and updates the cost of the Pizza and the total cost of the order.
-	public void saveOrderButtonPushed() throws IllegalPizza {
-		// Displays the number of Pizza to the Line Order Section.
+	public void saveOrderButtonPushed() {
 		if (pizzaAmount.getText().equals(""))
 			return;
 		String pizzaOrders = linePizza.toString();
@@ -69,8 +68,8 @@ public class PizzaController {
 		updateTotalCost(overallCost);
 		lineOrders.appendText(pizzaOrders + " Quantity Cost: $"
 				+ String.format("%.2f", costOrder) + ".\n");
-	}	
-	
+	}
+
 	//If any checkbox for the toppings are selected, and will update the Pizza object accordingly.
 	public void setActionToppings() throws IllegalPizza {
 		if (pineApple.isSelected())pizza.setPineapple("Single");
@@ -85,6 +84,7 @@ public class PizzaController {
 		if (vegetarian.isSelected()) pizza.setVegetarian(true);
 		else pizza.setVegetarian(false);
 
+		//Updates the Costs
 		updatePizzaCost(pizza);
 		float costOrder = (float) (Math.round(linePizza.getCost() * 100.0) / 100.0);
 		updateOrderCost(costOrder);
@@ -133,6 +133,7 @@ public class PizzaController {
 		greenPepper.setSelected(false);
 		vegetarian.setSelected(false);
 
+		//Resets the Cost to Default Values
 		updatePizzaCost(pizza);
 		updateOrderCost(costPerOrder());
 		updateTotalCost(0);
