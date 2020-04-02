@@ -1,99 +1,170 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PizzaController">
+
+<GridPane prefHeight="408.0" prefWidth="607.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PizzaController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="222.66665649414062" minHeight="10.0" prefHeight="220.66665649414062" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="187.33334350585938" vgrow="SOMETIMES" />
+  </rowConstraints>
    <children>
-      <AnchorPane prefHeight="101.0" prefWidth="195.0">
+      <TextArea fx:id="lineOrders" editable="false" prefHeight="218.0" prefWidth="624.0" promptText="Orders:" text="&#10;" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+         </GridPane.margin>
+      </TextArea>
+      <GridPane prefHeight="195.0" prefWidth="605.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="264.00002543131507" minWidth="10.0" prefWidth="218.66666666666666" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="275.999989827474" minWidth="10.0" prefWidth="211.33333333333334" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.6666259765625" minWidth="10.0" prefWidth="175.33333333333337" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
          <children>
-            <Label fx:id="pizzaSize" layoutX="84.0" layoutY="6.0" text="Size:">
+            <CheckBox fx:id="pineApple" mnemonicParsing="false" onAction="#setActionToppings" prefHeight="17.0" prefWidth="83.0" text="Pineapple" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </CheckBox>
+            <CheckBox fx:id="greenPepper" mnemonicParsing="false" onAction="#setActionToppings" text="Green Pepper" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </CheckBox>
+            <CheckBox fx:id="ham" mnemonicParsing="false" onAction="#setActionToppings" text="Ham" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="120.0" />
+               </GridPane.margin>
+            </CheckBox>
+            <CheckBox fx:id="vegetarian" mnemonicParsing="false" onAction="#setActionToppings" text="Vegetarian" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="120.0" />
+               </GridPane.margin>
+            </CheckBox>
+            <Label fx:id="pizzaCheese" text="Cheese:" GridPane.columnIndex="2">
                <font>
                   <Font name="Times New Roman" size="14.0" />
                </font>
+               <GridPane.margin>
+                  <Insets left="70.0" />
+               </GridPane.margin>
             </Label>
-            <ChoiceBox fx:id="sizeOfPizza" layoutX="23.0" layoutY="38.0" prefWidth="150.0" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="-2.0" layoutY="204.0" prefHeight="171.0" prefWidth="461.0">
-         <children>
-            <TextArea fx:id="lineOrders" editable="false" layoutX="7.0" layoutY="3.0" prefHeight="185.0" prefWidth="590.0" promptText="Orders:" text="&#10;" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="14.0" layoutY="109.0" prefHeight="88.0" prefWidth="203.0">
-         <children>
-            <Label layoutX="-1.0" text="Pizza Cost:">
+            <ChoiceBox fx:id="cheeseTopping" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="25.0" right="25.0" />
+               </GridPane.margin>
+            </ChoiceBox>
+            <Label text="Cost Per Pizza:" GridPane.rowIndex="3">
                <font>
-                  <Font name="Times New Roman" size="23.0" />
+                  <Font name="Times New Roman" size="19.0" />
                </font>
+               <GridPane.margin>
+                  <Insets left="7.0" />
+               </GridPane.margin>
             </Label>
-            <Label layoutX="-2.0" layoutY="30.0" text="Order Cost:">
+            <Label text="Quantity Cost:" GridPane.rowIndex="4">
                <font>
-                  <Font name="Times New Roman" size="23.0" />
+                  <Font name="Times New Roman" size="20.0" />
                </font>
+               <GridPane.margin>
+                  <Insets left="6.0" />
+               </GridPane.margin>
             </Label>
-            <Label layoutX="-1.0" layoutY="60.0" text="Total Cost:">
+            <Label text="Total Cost:" GridPane.rowIndex="5">
                <font>
-                  <Font name="Times New Roman" size="23.0" />
+                  <Font name="Times New Roman" size="21.0" />
                </font>
+               <GridPane.margin>
+                  <Insets left="30.0" />
+               </GridPane.margin>
             </Label>
-            <TextField fx:id="pizzaCost" layoutX="114.0" layoutY="2.0" prefHeight="25.0" prefWidth="75.0" />
-            <TextField fx:id="orderCost" layoutX="114.0" layoutY="31.0" prefHeight="25.0" prefWidth="75.0" />
-            <TextField fx:id="totalCost" layoutX="114.0" layoutY="61.0" prefHeight="25.0" prefWidth="75.0" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="204.0" layoutY="1.0" prefHeight="111.0" prefWidth="203.0">
-         <children>
-            <Label layoutX="59.0" layoutY="6.0" text="Pizza Toppings">
+            <TextField fx:id="pizzaCost" editable="false" prefHeight="25.0" prefWidth="75.0" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets left="125.0" right="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="orderCost" editable="false" prefHeight="25.0" prefWidth="75.0" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets left="125.0" right="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="totalCost" editable="false" prefHeight="25.0" prefWidth="75.0" GridPane.rowIndex="5">
+               <GridPane.margin>
+                  <Insets left="125.0" right="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <Label text="Pizza Toppings" GridPane.columnIndex="1">
                <font>
                   <Font name="Times New Roman" size="14.0" />
                </font>
+               <GridPane.margin>
+                  <Insets left="55.0" />
+               </GridPane.margin>
             </Label>
-            <CheckBox fx:id="pineApple" layoutX="22.0" layoutY="32.0" mnemonicParsing="false" onAction="#setActionToppings" text="Pineapple" />
-            <CheckBox fx:id="greenPepper" layoutX="112.0" layoutY="71.0" mnemonicParsing="false" onAction="#setActionToppings" text="Green Pepper" />
-            <CheckBox fx:id="ham" layoutX="22.0" layoutY="71.0" mnemonicParsing="false" onAction="#setActionToppings" text="Ham" />
-            <CheckBox fx:id="vegetarian" layoutX="112.0" layoutY="32.0" mnemonicParsing="false" onAction="#setActionToppings" text="Vegetarian" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="198.0" layoutY="102.0" prefHeight="101.0" prefWidth="203.0">
-         <children>
-            <Label layoutX="75.0" layoutY="14.0" text="Quantity">
+            <Label fx:id="pizzaSize" text="Size:">
                <font>
-                  <Font size="14.0" />
+                  <Font name="Times New Roman" size="14.0" />
                </font>
+               <GridPane.margin>
+                  <Insets left="105.0" />
+               </GridPane.margin>
             </Label>
-            <TextField fx:id="pizzaAmount" layoutX="23.0" layoutY="44.0" prefHeight="25.0" prefWidth="157.0" promptText="Enter a Number (1-100):" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="397.0" layoutY="91.0" prefHeight="88.0" prefWidth="203.0">
-         <children>
-            <Button layoutX="48.0" layoutY="69.0" mnemonicParsing="false" onAction="#saveOrderButtonPushed" prefHeight="32.0" prefWidth="108.0" text="Save Order">
-               <font>
-                  <Font name="Times New Roman" size="18.0" />
-               </font>
-            </Button>
-            <Button layoutX="48.0" layoutY="19.0" mnemonicParsing="false" onAction="#clearAll" prefHeight="32.0" prefWidth="108.0" text="Reset Orders">
+            <ChoiceBox fx:id="sizeOfPizza" prefWidth="150.0" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="40.0" />
+               </GridPane.margin>
+            </ChoiceBox>
+            <Button mnemonicParsing="false" onAction="#saveOrderButtonPushed" prefHeight="32.0" prefWidth="108.0" text="Save Order" GridPane.columnIndex="2" GridPane.rowIndex="5">
                <font>
                   <Font name="Times New Roman" size="16.0" />
                </font>
+               <GridPane.margin>
+                  <Insets left="40.0" />
+               </GridPane.margin>
             </Button>
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="401.0" prefHeight="101.0" prefWidth="195.0">
-         <children>
-            <Label fx:id="pizzaCheese" layoutX="75.0" layoutY="6.0" text="Cheese:">
+            <Button mnemonicParsing="false" onAction="#clearAll" prefHeight="32.0" prefWidth="108.0" text="Reset Orders" GridPane.columnIndex="2" GridPane.rowIndex="3">
                <font>
-                  <Font name="Times New Roman" size="14.0" />
+                  <Font name="Times New Roman" size="16.0" />
                </font>
+               <GridPane.margin>
+                  <Insets left="40.0" />
+               </GridPane.margin>
+            </Button>
+            <Label text="Quantity" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="75.0" />
+               </GridPane.margin>
             </Label>
-            <ChoiceBox fx:id="cheeseTopping" layoutX="23.0" layoutY="38.0" prefWidth="150.0" />
+            <TextField fx:id="pizzaAmount" prefHeight="25.0" prefWidth="138.0" promptText="Enter a Number (1-100):" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <GridPane.margin>
+                  <Insets left="30.0" right="40.0" />
+               </GridPane.margin>
+            </TextField>
          </children>
-      </AnchorPane>
+      </GridPane>
    </children>
-</AnchorPane>
+</GridPane>

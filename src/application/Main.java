@@ -2,6 +2,8 @@ package application;
 	
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -15,7 +17,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			AnchorPane root = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
+			GridPane root =  FXMLLoader.load(getClass().getResource("MainPage.fxml"));
 			Scene scene = new Scene(root,600,400);		
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Pizza Order System");

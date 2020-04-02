@@ -65,7 +65,7 @@ public class PizzaController {
 		// Displays the number of Pizza to the Line Order Section.
 		String pizzaOrders = linePizza.toString();
 		float costOrder = (float) (Math.round(linePizza.getCost() * 100.0) / 100.0);
-		lineOrders.appendText(pizzaOrders + " Order Cost: $"
+		lineOrders.appendText(pizzaOrders + " Quantity Cost: $"
 				+ String.format("%.2f", costOrder) + ".\n");
 
 		overallCost +=  costOrder;
@@ -86,27 +86,28 @@ public class PizzaController {
 		if (vegetarian.isSelected()) pizza.setVegetarian(true);
 		else pizza.setVegetarian(false);
 
-		updatePizzaCost();
+		updatePizzaCost(pizza);
 		float costOrder = (float) (Math.round(linePizza.getCost() * 100.0) / 100.0);
 		updateOrderCost(costOrder);
 	}
 
 	//Updates the Pizza Cost Text Field.
-	public void updatePizzaCost(){
-		pizzaCost.setText("" + String.format("%.2f", pizza.getCost()));
+	public void updatePizzaCost(Pizza clonePizza){
+		pizzaCost.setText("" + String.format("%.2f", clonePizza.getCost()));
 	}
 
-	//Updates the Cost Per Order Cost Text Field.
+	//Updates the Cost Per Order Text Field.
 	public void updateOrderCost(float costOrder){
 		orderCost.setText("" + String.format("%.2f", costOrder));
 	}
 
-	//Updates the Total Order Cost Text Field
+	//Updates the Total Cost in the Text field.
 	public void updateTotalCost(float overallCost){
 		totalCost.setText("" + String.format("%.2f", overallCost));
+
 	}
 
-	//Converts the Cost per order to 2 decimal places.
+	//Calculates the cost per order and rounds it to the nearest second decimal place.
 	public float costPerOrder(){
 		float costOrder = (float) (Math.round(linePizza.getCost() * 100.0) / 100.0);
 		return costOrder;
@@ -128,6 +129,7 @@ public class PizzaController {
 
 		//Resets the GUI Settings back to default
 		lineOrders.setText("Orders: \n");
+		pizzaCost.setText("");
 		sizeOfPizza.setValue("Small");
 		cheeseTopping.setValue("Single");
 		ham.setSelected(true);
@@ -135,8 +137,9 @@ public class PizzaController {
 		greenPepper.setSelected(false);
 		vegetarian.setSelected(false);
 
-		overallCost = 0;
-		updateTotalCost(overallCost);
+		updatePizzaCost(pizza);
+		updateOrderCost(costPerOrder());
+		updateTotalCost(0);
 	}
 
 	@FXML
@@ -163,8 +166,8 @@ public class PizzaController {
 		vegetarian.disableProperty().bind(ham.selectedProperty());
 
 		//Displays the cost of one default pizza.
-		updatePizzaCost();
-		updateOrderCost(linePizza.getCost());
+		updatePizzaCost(pizza);
+		updateOrderCost(costPerOrder());
 		updateTotalCost(overallCost);
 
 		//Listens to when the number of pizzas has changed and automatically changes the total order costs.
@@ -207,8 +210,8 @@ public class PizzaController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-    		updatePizzaCost();
-    		updateOrderCost(linePizza.getCost());
+    		updatePizzaCost(pizza);
+    		updateOrderCost(costPerOrder());
     	});
 		
 		// Listens to see if the choice box has been changed and updates the Pizza object accordingly.
