@@ -21,39 +21,52 @@ import java.util.Collections;
  * <p>
  * 
  * @author Patrick Li
- * @version 3.0
+ * @version 3.5
  */
 public class PizzaController {
 	//Section for size of the Pizza.
-	@FXML Label pizzaSize;
-	@FXML ChoiceBox<String> sizeOfPizza = new ChoiceBox<>();
+	@FXML
+	Label pizzaSize;
+	@FXML
+	ChoiceBox<String> sizeOfPizza = new ChoiceBox<>();
 
+	//Creates a list of Strings of choices for the size of the pizza.
 	ObservableList<String> choiceListSize = FXCollections.observableArrayList(
 			"Small", "Medium", "Large");
 
 	//Section created for Cheese Choices/
-	@FXML Label pizzaCheese;
-	@FXML ChoiceBox<String> cheeseTopping = new ChoiceBox<>();
+	@FXML
+	Label pizzaCheese;
+	@FXML
+	ChoiceBox<String> cheeseTopping = new ChoiceBox<>();
 
-	// Creates a list of Strings of choices of cheese.
+	//Creates a list of Strings of choices of cheese.
 	ObservableList<String> choiceListCheese = FXCollections.observableArrayList(
 			"Single", "Double", "Triple");
 	
 	// CheckBoxes for the Pizza toppings.
-	@FXML CheckBox pineApple;
-	@FXML CheckBox greenPepper;
-	@FXML CheckBox ham;
-	@FXML CheckBox vegetarian;
+	@FXML
+	CheckBox pineApple;
+	@FXML
+	CheckBox greenPepper;
+	@FXML
+	CheckBox ham;
+	@FXML
+	CheckBox vegetarian;
 	
 	// TextField which allows for user input in the amount of Pizza they want to order.
 	@FXML private TextField pizzaAmount;
 	int numOfPizza;
 	
 	//Labels, TextFields, TextArea, and labels which represent the total costs.
-	@FXML private TextField pizzaCost;
-	@FXML private TextField orderCost;
-	@FXML private TextField totalCost;
-	@FXML private TextArea lineOrders;
+	@FXML
+	private TextField pizzaCost;
+	@FXML
+	private TextField orderCost;
+	@FXML
+	private TextField totalCost;
+	@FXML
+	private TextArea lineOrders;
 
 	//Creates a instance from the Pizza class and from the LineItem Class.
 	Pizza pizza;
@@ -66,7 +79,8 @@ public class PizzaController {
 	float overallCost;
 
 	//Buttons
-	@FXML private Button saveButton;
+	@FXML
+	private Button saveButton;
 
 	//If any checkbox for the toppings are selected, and will update the Pizza object accordingly.
 	public void setActionToppings() throws IllegalPizza {
@@ -214,17 +228,18 @@ public class PizzaController {
 			orderCost.setText("" + String.format("%.2f", linePizza.getCost()));
     	});
 
-		//Updates the display if the user clicks on the save button.
+		////Updates the display if the user clicks on the save button.
 		saveButton.setOnAction(actionEvent -> {
 			//If the Pizza amount is empty, It will not print anything.
-			if (pizzaAmount.getText().equals("")) return;
+			if (pizzaAmount.getText().equals(""))
+				return;
 
 			//Converts one order to a string format.
 			String pizzaOrders = linePizza.toString();
 
 			//Updates the Total Costs.
-			float costOrder = (float) (Math.round(linePizza.getCost() * 100.0) / 100.0);
-			overallCost +=  costOrder;
+			float CostOfOrder = costPerOrder();
+			overallCost +=  CostOfOrder;
 			updateTotalCost(overallCost);
 
 			//Initializes an String used to display the orders and total cost.
@@ -232,6 +247,7 @@ public class PizzaController {
 
 			//Adds the orders to the ArrayList.
 			orders.add(pizzaOrders);
+
 
 			//For each loop adding the orders to the String output variable.
 			for(String orderString: orders){
