@@ -158,7 +158,7 @@
                   <Insets left="75.0" />
                </GridPane.margin>
             </Label>
-            <TextField fx:id="pizzaAmount" prefHeight="25.0" prefWidth="138.0" promptText="Enter a Number (1-100):" GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <TextField fx:id="pizzaAmount" prefHeight="25.0" prefWidth="138.0" promptText="Enter a Number (1-100):" text="1" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <GridPane.margin>
                   <Insets left="30.0" right="40.0" />
                </GridPane.margin>

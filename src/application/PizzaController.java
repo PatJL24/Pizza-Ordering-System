@@ -61,6 +61,8 @@ public class PizzaController {
 	// To updates the Pizza updated. and updates the cost of the Pizza and the total cost of the order.
 	public void saveOrderButtonPushed() throws IllegalPizza {
 		// Displays the number of Pizza to the Line Order Section.
+		if (pizzaAmount.getText().equals(""))
+			return;
 		String pizzaOrders = linePizza.toString();
 		float costOrder = (float) (Math.round(linePizza.getCost() * 100.0) / 100.0);
 		overallCost +=  costOrder;
@@ -112,9 +114,6 @@ public class PizzaController {
 	//Resets all the settings and values back to the default values.
 	@FXML
 	void clearAll(ActionEvent event) throws IllegalPizza {
-		//Resets the Amount of Pizza back to 1.
-		pizzaAmount.setText("1");
-
 		//Resets the Pizza setting to default.
 		pizza.setSize("Small");
 		pizza.setVegetarian(false);
@@ -167,16 +166,12 @@ public class PizzaController {
 		updateOrderCost(costPerOrder());
 		updateTotalCost(overallCost);
 
-		//Sets the Text Field for the amount of Pizza to 1.
-		pizzaAmount.setText("1");
-
 		//Listens to when the number of pizzas has changed and automatically changes the total order costs.
 		pizzaAmount.textProperty().addListener((observableValue, oldText, newText) ->
 		{
 			if (newText != null && !newText.isEmpty()) {
 				try {
 					numOfPizza = Integer.parseInt(newText);
-
 					if(numOfPizza < 1 && numOfPizza > 100){
 						pizzaAmount.setPromptText("");
 					}else{
