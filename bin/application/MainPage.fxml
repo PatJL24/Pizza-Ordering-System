@@ -28,8 +28,8 @@
       </TextArea>
       <GridPane prefHeight="195.0" prefWidth="605.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="264.00002543131507" minWidth="10.0" prefWidth="218.66666666666666" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="275.999989827474" minWidth="10.0" prefWidth="211.33333333333334" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="264.00002543131507" minWidth="10.0" prefWidth="215.66666666666666" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="275.999989827474" minWidth="10.0" prefWidth="216.33333333333334" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.6666259765625" minWidth="10.0" prefWidth="175.33333333333337" />
         </columnConstraints>
         <rowConstraints>
@@ -53,12 +53,12 @@
             </CheckBox>
             <CheckBox fx:id="ham" mnemonicParsing="false" onAction="#setActionToppings" text="Ham" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <GridPane.margin>
-                  <Insets left="120.0" />
+                  <Insets left="125.0" />
                </GridPane.margin>
             </CheckBox>
             <CheckBox fx:id="vegetarian" mnemonicParsing="false" onAction="#setActionToppings" text="Vegetarian" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
-                  <Insets left="120.0" />
+                  <Insets left="125.0" />
                </GridPane.margin>
             </CheckBox>
             <Label fx:id="pizzaCheese" text="Cheese:" GridPane.columnIndex="2">
@@ -118,7 +118,7 @@
                   <Font name="Times New Roman" size="14.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="55.0" />
+                  <Insets left="60.0" />
                </GridPane.margin>
             </Label>
             <Label fx:id="pizzaSize" text="Size:">
@@ -142,7 +142,7 @@
                   <Insets left="40.0" />
                </GridPane.margin>
             </Button>
-            <Button mnemonicParsing="false" onAction="#clearAll" prefHeight="32.0" prefWidth="108.0" text="Reset Orders" GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <Button mnemonicParsing="false" onAction="#clearAll" prefHeight="32.0" prefWidth="108.0" text="Reset Order" GridPane.columnIndex="2" GridPane.rowIndex="3">
                <font>
                   <Font name="Times New Roman" size="16.0" />
                </font>
@@ -155,12 +155,12 @@
                   <Font size="14.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="75.0" />
+                  <Insets left="80.0" />
                </GridPane.margin>
             </Label>
-            <TextField fx:id="pizzaAmount" prefHeight="25.0" prefWidth="138.0" promptText="Enter a Number (1-100):" text="1" GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <TextField fx:id="pizzaAmount" prefHeight="25.0" prefWidth="138.0" promptText="Enter a Number (1-100):" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <GridPane.margin>
-                  <Insets left="30.0" right="40.0" />
+                  <Insets left="35.0" right="40.0" />
                </GridPane.margin>
             </TextField>
          </children>

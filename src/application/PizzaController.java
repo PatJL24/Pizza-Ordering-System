@@ -17,7 +17,7 @@ import javafx.fxml.FXML;
  * <p>
  * 
  * @author Patrick Li
- * @version 2.5
+ * @version 3.0
  */
 public class PizzaController {
 	//Section for size of the Pizza.
@@ -123,6 +123,7 @@ public class PizzaController {
 		pizza.setCheese("Single");
 		linePizza.setNumber(1);
 
+
 		//Resets the GUI Settings back to default
 		lineOrders.setText("Orders: \n");
 		pizzaCost.setText("");
@@ -132,10 +133,12 @@ public class PizzaController {
 		pineApple.setSelected(false);
 		greenPepper.setSelected(false);
 		vegetarian.setSelected(false);
+		pizzaAmount.setText("1");
 
 		//Resets the Cost to Default Values
 		updatePizzaCost(pizza);
 		updateOrderCost(costPerOrder());
+		overallCost = 0;
 		updateTotalCost(0);
 	}
 
@@ -157,6 +160,7 @@ public class PizzaController {
 		sizeOfPizza.setValue("Small");
 		cheeseTopping.setValue("Single");
 		ham.setSelected(true);
+		pizzaAmount.setText("1");
 
 		// Does not allow pineapple or green pepper to selected without ham.
 		ham.disableProperty().bind(vegetarian.selectedProperty());
@@ -190,13 +194,9 @@ public class PizzaController {
 		sizeOfPizza.valueProperty().addListener((observableValue, oldVal, newVal) ->
     	{
     		String pizzaSize = sizeOfPizza.getValue();
-    		
     		try {
 				pizza.setSize(pizzaSize);
-			} catch (IllegalPizza e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			} catch (IllegalPizza e) {}
     		updatePizzaCost(pizza);
     		updateOrderCost(costPerOrder());
     	});
@@ -207,10 +207,7 @@ public class PizzaController {
     		String pizzaCheese = cheeseTopping.getValue();
     		try {
 				pizza.setCheese(pizzaCheese);
-			} catch (IllegalPizza e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			} catch (IllegalPizza e) {}
 			pizzaCost.setText("" + String.format("%.2f", pizza.getCost()));
 			orderCost.setText("" + String.format("%.2f", linePizza.getCost()));
     	});
