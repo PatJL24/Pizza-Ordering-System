@@ -20,7 +20,6 @@ import javafx.fxml.FXML;
  * @version 2.5
  */
 public class PizzaController {
-	
 	//Section for size of the Pizza.
 	@FXML Label pizzaSize;
 	@FXML ChoiceBox<String> sizeOfPizza = new ChoiceBox<>();
@@ -56,7 +55,6 @@ public class PizzaController {
 	Pizza pizza;
 	LineItem linePizza;
 
-
 	//float variable to keep track of the overall total cost:
 	float overallCost;
 
@@ -65,11 +63,10 @@ public class PizzaController {
 		// Displays the number of Pizza to the Line Order Section.
 		String pizzaOrders = linePizza.toString();
 		float costOrder = (float) (Math.round(linePizza.getCost() * 100.0) / 100.0);
-		lineOrders.appendText(pizzaOrders + " Quantity Cost: $"
-				+ String.format("%.2f", costOrder) + ".\n");
-
 		overallCost +=  costOrder;
 		updateTotalCost(overallCost);
+		lineOrders.appendText(pizzaOrders + " Quantity Cost: $"
+				+ String.format("%.2f", costOrder) + ".\n");
 	}	
 	
 	//If any checkbox for the toppings are selected, and will update the Pizza object accordingly.
@@ -104,7 +101,6 @@ public class PizzaController {
 	//Updates the Total Cost in the Text field.
 	public void updateTotalCost(float overallCost){
 		totalCost.setText("" + String.format("%.2f", overallCost));
-
 	}
 
 	//Calculates the cost per order and rounds it to the nearest second decimal place.
@@ -117,7 +113,7 @@ public class PizzaController {
 	@FXML
 	void clearAll(ActionEvent event) throws IllegalPizza {
 		//Resets the Amount of Pizza back to 1.
-		pizzaAmount.clear();
+		pizzaAmount.setText("1");
 
 		//Resets the Pizza setting to default.
 		pizza.setSize("Small");
@@ -126,6 +122,7 @@ public class PizzaController {
 		pizza.setPineapple("None");
 		pizza.setHam("Single");
 		pizza.setCheese("Single");
+		linePizza.setNumber(1);
 
 		//Resets the GUI Settings back to default
 		lineOrders.setText("Orders: \n");
@@ -170,6 +167,9 @@ public class PizzaController {
 		updateOrderCost(costPerOrder());
 		updateTotalCost(overallCost);
 
+		//Sets the Text Field for the amount of Pizza to 1.
+		pizzaAmount.setText("1");
+
 		//Listens to when the number of pizzas has changed and automatically changes the total order costs.
 		pizzaAmount.textProperty().addListener((observableValue, oldText, newText) ->
 		{
@@ -187,15 +187,6 @@ public class PizzaController {
 				} catch (NumberFormatException | IllegalPizza e) {
 					((StringProperty)observableValue).setValue(oldText);
 				}
-			}else{
-				numOfPizza = 1;
-				try {
-					linePizza.setNumber(numOfPizza);
-				} catch (IllegalPizza illegalPizza) {
-					illegalPizza.printStackTrace();
-				}
-				float costOrder = costPerOrder();
-				updateOrderCost(costOrder);
 			}
 		});
 
